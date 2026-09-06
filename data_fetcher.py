@@ -15,6 +15,7 @@
 
 import requests
 import json
+import time
 
 # =======================================================================
 # Step 1: Define at least 20 cities/locations and their road connections
@@ -104,12 +105,14 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
 
     city_coordinates = {}
     url = "https://nominatim.openstreetmap.org/search"
-    headers = {"User-Agent": "AI_Search_project"}
+    headers = {"User-Agent": "AI-Search-MMDT143/1.0"}
 
-    for city in cities:
+    for city in cities_list:
+        time.sleep(1)
         params = {"q": city, "format": "json"}
         try:
             r = requests.get(url, params=params, headers=headers)
+            r.raise_for_status()
             data = r.json()
 
             if data:
@@ -117,8 +120,8 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
                 lon = data[0]["lon"]
                 city_coordinates[city] = (lat, lon)
 
-        except Exception as e:
-            r.raise_for_status()
+        except requests.RequestException as e:
+            print(f"Error fetching {city}: {e}")
 
     return city_coordinates
 
@@ -138,7 +141,7 @@ def get_connection_distances(city_coordinates, connections):
 
     print("\nFetching road distances between connected cities...")
 
-    # Get all unique pairs of connected cities
+    # First, Get all unique pairs of connected cities
     connection_pairs = set()
     for city, neighbors in connections.items():
         for neighbor in neighbors:
