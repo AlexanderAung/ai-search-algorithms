@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <title>AI Search</title>
+  </head>
+
+  <body>
+    <h1>AI Search</h1>
+
+    <form action="/search" method="POST">
+      <label>Start:</label>
+      <input type="text" name="start" />
+
+      <br /><br />
+
+      <label>Goal:</label>
+      <input type="text" name="goal" />
+
+      <br /><br />
+
+      <label>Algorithm:</label>
+      <select name="algorithm">
+        <option value="bfs">BFS</option>
+        <option value="dfs">DFS</option>
+        <option value="greedy">Greedy Best-First</option>
+        <option value="astar">A*</option>
+      </select>
+
+      <br /><br />
+
+      <button type="submit">Search</button>
+    </form>
+
+    {% if path %}
+    <h2>Result</h2>
+
+    <p>Path: {{ path }}</p>
+    <p>Cost: {{ cost }}</p>
+    {% endif %}
+  </body>
+</html>
