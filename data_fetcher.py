@@ -111,7 +111,7 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
         time.sleep(1)
         params = {"q": city, "format": "json"}
         try:
-            print("fSearching for {city}")
+            print(f"Searching for {city}")
             r = requests.get(url, params=params, headers=headers, timeout=10)
             print(f"Status  : {r.status_code}")
             print(f"URL     : {r.url}")
@@ -144,6 +144,7 @@ def get_connected_pairs(connections):
         for neighbor in neighbors:
             pair = tuple(sorted([city, neighbor]))
             connected_pairs.add(pair)
+    return connected_pairs
 
 
 def get_connected_pairs_distances(city_coordinates, connected_pairs):
