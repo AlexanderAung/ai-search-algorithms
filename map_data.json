@@ -1,0 +1,260 @@
+{
+  "cities": [
+    "Yangon",
+    "Mandalay",
+    "Naypyidaw",
+    "Bago",
+    "Mawlamyine",
+    "Taunggyi",
+    "Sittwe",
+    "Pathein",
+    "Myitkyina",
+    "Lashio",
+    "Hpa-an",
+    "Monywa",
+    "Meiktila",
+    "Pyay",
+    "Magway",
+    "Sagaing",
+    "Pakokku",
+    "Dawei",
+    "Myeik",
+    "Bhamo",
+    "Loikaw",
+    "Hakha"
+  ],
+  "coordinates": {
+    "Yangon": [
+      "16.7967129",
+      "96.1609916"
+    ],
+    "Mandalay": [
+      "-34.0148578",
+      "18.6261607"
+    ],
+    "Naypyidaw": [
+      "19.7753289",
+      "96.1032552"
+    ],
+    "Bago": [
+      "10.5376299",
+      "122.8352802"
+    ],
+    "Mawlamyine": [
+      "16.4908026",
+      "97.6284825"
+    ],
+    "Taunggyi": [
+      "20.7870108",
+      "97.0387263"
+    ],
+    "Sittwe": [
+      "20.1391970",
+      "92.8970859"
+    ],
+    "Pathein": [
+      "16.2584348",
+      "97.9612347"
+    ],
+    "Myitkyina": [
+      "25.3833313",
+      "97.3999925"
+    ],
+    "Lashio": [
+      "22.9418628",
+      "97.7451650"
+    ],
+    "Hpa-an": [
+      "16.8902634",
+      "97.6362745"
+    ],
+    "Monywa": [
+      "22.1182175",
+      "95.1324747"
+    ],
+    "Meiktila": [
+      "20.8814233",
+      "95.8619463"
+    ],
+    "Pyay": [
+      "18.8166670",
+      "95.2166670"
+    ],
+    "Magway": [
+      "20.2747958",
+      "94.7362245"
+    ],
+    "Sagaing": [
+      "24.4741444",
+      "95.4788047"
+    ],
+    "Pakokku": [
+      "21.3343349",
+      "95.0944271"
+    ],
+    "Dawei": [
+      "14.0797232",
+      "98.1990191"
+    ],
+    "Myeik": [
+      "12.4319552",
+      "98.5955711"
+    ],
+    "Bhamo": [
+      "24.2585793",
+      "97.2283893"
+    ],
+    "Loikaw": [
+      "19.6741670",
+      "97.2094441"
+    ],
+    "Hakha": [
+      "22.6427551",
+      "93.6096217"
+    ]
+  },
+  "connections": {
+    "Naypyidaw": [
+      "Yangon",
+      "Mandalay",
+      "Taunggyi",
+      "Meiktila",
+      "Pyay",
+      "Bago"
+    ],
+    "Yangon": [
+      "Bago",
+      "Pathein",
+      "Naypyidaw",
+      "Mawlamyine",
+      "Pyay"
+    ],
+    "Mandalay": [
+      "Naypyidaw",
+      "Monywa",
+      "Meiktila",
+      "Sagaing",
+      "Pyay",
+      "Pakokku"
+    ],
+    "Taunggyi": [
+      "Naypyidaw",
+      "Meiktila",
+      "Lashio",
+      "Loikaw"
+    ],
+    "Lashio": [
+      "Taunggyi",
+      "Mandalay",
+      "Bhamo"
+    ],
+    "Bhamo": [
+      "Lashio",
+      "Myitkyina"
+    ],
+    "Myitkyina": [
+      "Bhamo"
+    ],
+    "Loikaw": [
+      "Taunggyi"
+    ],
+    "Mawlamyine": [
+      "Yangon",
+      "Bago",
+      "Hpa-an",
+      "Dawei"
+    ],
+    "Hpa-an": [
+      "Mawlamyine"
+    ],
+    "Dawei": [
+      "Mawlamyine",
+      "Myeik"
+    ],
+    "Myeik": [
+      "Dawei"
+    ],
+    "Pathein": [
+      "Yangon"
+    ],
+    "Sittwe": [
+      "Pyay",
+      "Magway"
+    ],
+    "Hakha": [
+      "Sittwe"
+    ],
+    "Bago": [
+      "Yangon",
+      "Naypyidaw",
+      "Mawlamyine"
+    ],
+    "Meiktila": [
+      "Naypyidaw",
+      "Mandalay",
+      "Taunggyi",
+      "Magway"
+    ],
+    "Pyay": [
+      "Naypyidaw",
+      "Yangon",
+      "Mandalay",
+      "Magway"
+    ],
+    "Magway": [
+      "Pyay",
+      "Meiktila",
+      "Pakokku",
+      "Sittwe"
+    ],
+    "Monywa": [
+      "Mandalay",
+      "Sagaing",
+      "Pakokku"
+    ],
+    "Sagaing": [
+      "Mandalay",
+      "Monywa"
+    ],
+    "Pakokku": [
+      "Mandalay",
+      "Magway",
+      "Monywa"
+    ]
+  },
+  "distances": {
+    "Mandalay-Meiktila": 7935.1,
+    "Meiktila-Naypyidaw": 145.8,
+    "Loikaw-Taunggyi": 153.7,
+    "Magway-Meiktila": 230.1,
+    "Pathein-Yangon": 362.2,
+    "Mawlamyine-Yangon": 298.8,
+    "Lashio-Mandalay": 8073.3,
+    "Monywa-Pakokku": 112.2,
+    "Naypyidaw-Taunggyi": 279.2,
+    "Meiktila-Taunggyi": 181.7,
+    "Magway-Sittwe": 489.5,
+    "Mandalay-Pyay": 8171.6,
+    "Naypyidaw-Yangon": 394.1,
+    "Naypyidaw-Pyay": 246.6,
+    "Dawei-Myeik": 245.0,
+    "Bago-Naypyidaw": 2257.1,
+    "Magway-Pyay": 236.8,
+    "Hakha-Sittwe": 611.0,
+    "Hpa-an-Mawlamyine": 60.3,
+    "Mandalay-Pakokku": 7782.4,
+    "Monywa-Sagaing": 438.2,
+    "Magway-Pakokku": 205.7,
+    "Dawei-Mawlamyine": 316.2,
+    "Lashio-Taunggyi": 388.4,
+    "Bhamo-Myitkyina": 196.2,
+    "Bhamo-Lashio": 260.0,
+    "Bago-Mawlamyine": 1769.1,
+    "Bago-Yangon": 2053.5,
+    "Pyay-Sittwe": 636.2,
+    "Mandalay-Sagaing": 7583.3,
+    "Mandalay-Naypyidaw": 8051.7,
+    "Mandalay-Monywa": 7681.1,
+    "Pyay-Yangon": 282.5
+  }
+}
