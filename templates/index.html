@@ -9,12 +9,24 @@
 
     <form action="/search" method="POST">
       <label>Start:</label>
-      <input type="text" name="start" />
+      <select name="start" required>
+        <option value="">Select start city</option>
+
+        {% for city in cities %}
+        <option value="{{ city }}">{{ city }}</option>
+        {% endfor %}
+      </select>
 
       <br /><br />
 
       <label>Goal:</label>
-      <input type="text" name="goal" />
+      <select name="goal" required>
+        <option value="">Select goal city</option>
+
+        {% for city in cities %}
+        <option value="{{ city }}">{{ city }}</option>
+        {% endfor %}
+      </select>
 
       <br /><br />
 
@@ -22,6 +34,8 @@
       <select name="algorithm">
         <option value="bfs">BFS</option>
         <option value="dfs">DFS</option>
+        <option value="ucs">UCS</option>
+        <option value="ids">IDS</option>
         <option value="greedy">Greedy Best-First</option>
         <option value="astar">A*</option>
       </select>
@@ -33,7 +47,6 @@
 
     {% if path %}
     <h2>Result</h2>
-
     <p>Path: {{ path }}</p>
     <p>Cost: {{ cost }}</p>
     {% endif %}
