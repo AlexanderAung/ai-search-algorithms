@@ -1,17 +1,37 @@
 from flask import Flask, render_template, request
-
+import json
 from uninformed import bfs
 
 app = Flask(__name__)
 
+with open("map_data.json", "r") as f:
+    map_graph = json.load(f)
 
-# Dummy graph for testing
-graph = {
-    "A": [("B", 1), ("C", 4)],
-    "B": [("A", 1), ("C", 2), ("D", 5)],
-    "C": [("A", 4), ("B", 2), ("D", 1)],
-    "D": [("B", 5), ("C", 1)],
-}
+
+def build_graph(map_data):
+    graph = {}
+
+    for city, neighbors in map_data["connections"].items():
+        graph[city] = []
+
+        for neighbor in neighbors:
+            # Distance keys can be in either direction
+            key1 = f"{city}-{neighbor}"
+            key2 = f"{neighbor}-{city}"
+
+            if key1 in map_data["distances"]:
+                distance = map_data["distances"][key1]
+            elif key2 in map_data["distances"]:
+                distance = map_data["distances"][key2]
+            else:
+                distance = 0
+
+            graph[city].append((neighbor, distance))
+
+    return graph
+
+
+graph = build_graph(map_graph)
 
 
 @app.route("/")
