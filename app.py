@@ -1,6 +1,9 @@
-from flask import Flask, render_template, request
 import json
-from uninformed import bfs
+
+from flask import Flask, render_template, request
+
+from informed import a_star, greedy
+from uninformed import bfs, dfs, ids, ucs
 
 app = Flask(__name__)
 
@@ -36,17 +39,37 @@ graph = build_graph(map_graph)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    cities = map_graph["cities"]
+    return render_template("index.html", cities=cities)
 
 
 @app.route("/search", methods=["POST"])
 def search():
     start = request.form["start"]
     goal = request.form["goal"]
+    algo = request.form["algorithm"]
 
-    path, cost = bfs(graph, start, goal)
+    if algo == "bfs":
+        path, cost = bfs(graph, start, goal)
 
-    return render_template("index.html", path=path, cost=cost)
+    if algo == "dfs":
+        path, cost = dfs(graph, start, goal)
+
+    if algo == "ucs":
+        path, cost = ucs(graph, start, goal)
+
+    if algo == "ids":
+        path, cost = ids(graph, start, goal)
+
+    if algo == "a_star":
+        path, cost = a_star(graph, start, goal)
+
+    if algo == "greedy":
+        path, cost = greedy(graph, start, goal)
+
+    return render_template(
+        "index.html", cities=map_graph["cities"], path=path, cost=cost
+    )
 
 
 if __name__ == "__main__":
