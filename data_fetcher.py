@@ -133,9 +133,20 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
 # Step 4: Using the OSRM Routing API to retrieve actual road distances for the defined connections
 # Used AI to help generate part of this function !
 # =======================================================================
+def get_connected_pairs(connections):
+    """
+    Given connections : "cityA" :["townA", "townB"]
+    return [(cityA, townA), (cityA, townB)]
+    """
+    # Make all unique pairs of connected cities
+    connected_pairs = set()
+    for city, neighbors in connections.items():
+        for neighbor in neighbors:
+            pair = tuple(sorted([city, neighbor]))
+            connected_pairs.add(pair)
 
 
-def get_connection_distances(city_coordinates, connections):
+def get_connected_pairs_distances(city_coordinates, connected_pairs):
     """
     Get actual road distances between connected cities using OSRM API.
     Returns a dictionary with distances between city pairs.
@@ -144,18 +155,10 @@ def get_connection_distances(city_coordinates, connections):
 
     print("\nFetching road distances between connected cities...")
 
-    # First, Get all unique pairs of connected cities
-    connection_pairs = set()
-    for city, neighbors in connections.items():
-        for neighbor in neighbors:
-            # Sort to avoid duplicates (A-B same as B-A)
-            pair = tuple(sorted([city, neighbor]))
-            connection_pairs.add(pair)
-
-    total_pairs = len(connection_pairs)
+    total_pairs = len(connected_pairs)
     current = 0
 
-    for city1, city2 in connection_pairs:
+    for city1, city2 in connected_pairs:
         current += 1
         # Skip if coordinates are missing
         if city_coordinates.get(city1) is None or city_coordinates.get(city2) is None:
@@ -202,7 +205,9 @@ def get_connection_distances(city_coordinates, connections):
 # =======================================================================
 
 
-def build_and_save_graph(cities, connections, city_coordinates, distances):
+def build_and_save_graph(
+    cities, connections, city_coordinates, connected_pairs_distances
+):
     """
     Construct the graph and save to map_data.json
     """
@@ -210,7 +215,7 @@ def build_and_save_graph(cities, connections, city_coordinates, distances):
         "cities": cities,
         "coordinates": city_coordinates,
         "connections": connections,
-        "distances": distances,
+        "distances": connected_pairs_distances,
     }
 
     # Save to JSON file
@@ -220,5 +225,5 @@ def build_and_save_graph(cities, connections, city_coordinates, distances):
     print("\n✅ Graph data saved to map_data.json")
     print(f"Total cities: {len(cities)}")
     print(
-        f"Total connections with distances: {len([d for d in distances.values() if d is not None])}"
+        f"Total connections with distances: {len([d for d in connected_pairs_distances.values() if d is not None])}"
     )
