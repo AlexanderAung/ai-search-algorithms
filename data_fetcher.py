@@ -111,7 +111,7 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
         time.sleep(1)
         params = {"q": city, "format": "json"}
         try:
-            r = requests.get(url, params=params, headers=headers)
+            r = requests.get(url, params=params, headers=headers, timeout=10)
             r.raise_for_status()
             data = r.json()
 
