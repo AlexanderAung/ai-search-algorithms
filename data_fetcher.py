@@ -227,3 +227,14 @@ def build_and_save_graph(
     print(
         f"Total connections with distances: {len([d for d in connected_pairs_distances.values() if d is not None])}"
     )
+
+
+if __name__ == "__main__":
+    cities_coordinates = get_city_coordinates(cities)
+    connected_pairs = get_connected_pairs(connections)
+    connected_pairs_distances = get_connected_pairs_distances(
+        cities_coordinates, connected_pairs
+    )
+    build_and_save_graph(
+        cities, connections, cities_coordinates, connected_pairs_distances
+    )
