@@ -25,9 +25,9 @@
 
 ## Section 2: Map Graph Configuration
 
-- **Total Cities Configured:** [Write total number of cities here, must be 20 or more]
-- **Total Connection Edges:** [Write total number of highway connection edges here]
-- **Graph Fully Connected:** [Write Yes or No here]
+- **Total Cities Configured:** 22
+- **Total Connection Edges:** 32
+- **Graph Fully Connected:** Yes
 
 ---
 
@@ -35,10 +35,10 @@
 
 _Check the algorithms you successfully ran and verified on your local development server by placing an `x` in the brackets (e.g., `[x]`):_
 
-- [ ] Breadth-First Search (BFS)
-- [ ] Depth-First Search (DFS)
-- [ ] Uniform Cost Search (UCS)
-- [ ] Iterative Deepening Search (IDS)
+- [x] Breadth-First Search (BFS)
+- [x] Depth-First Search (DFS)
+- [x] Uniform Cost Search (UCS)
+- [x] Iterative Deepening Search (IDS)
 - [ ] Greedy Best-First Search (Greedy)
 - [ ] A* Search (A*)
 
