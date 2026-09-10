@@ -170,46 +170,57 @@ def get_connected_pairs_distances(city_coordinates, connected_pairs):
     print("\nFetching road distances between connected cities...")
 
     total_pairs = len(connected_pairs)
-    current = 0
 
-    for city1, city2 in connected_pairs:
-        current += 1
-        # Skip if coordinates are missing
-        if city_coordinates.get(city1) is None or city_coordinates.get(city2) is None:
-            print(f"⚠ Skipping {city1} - {city2} (missing coordinates)")
-            continue
+    for current, (city1, city2) in enumerate(connected_pairs, start=1):
+        if city1 not in city_coordinates:
+            print(f"⚠ Missing coordinates for {city1}")
+            continue 
 
+        if city2 not in city_coordinates:
+            print(f"⚠ Missing coordinates for {city2}")
+            continue 
+
+        
         lat1, lon1 = city_coordinates[city1]
         lat2, lon2 = city_coordinates[city2]
 
-        # OSRM API URL for driving distance
-        url = f"http://router.project-osrm.org/route/v1/driving/{lon1},{lat1};{lon2},{lat2}"
-        params = {"overview": "false"}  # We only need distance, not full route
+        # OSRM requires longitude,latitude
+        url = (
+            "https://router.project-osrm.org/route/v1/driving/"
+            f"{lon1},{lat1};{lon2},{lat2}"
+        )
+
+        params = {"overview": "false"}
 
         try:
-            r = requests.get(url, params=params)
+            r = requests.get(url, params=params, timeout=20)
+
             r.raise_for_status()
+
             data = r.json()
 
-            if data.get("code") == "Ok" and data.get("routes"):
-                distance_meters = data["routes"][0]["distance"]
-                distance_km = round(distance_meters / 1000, 1)  # Convert to km
+            if data.get("code") != "Ok":
+                print(f"✗ [{current}/{total_pairs}] No route: {city1} - {city2}")
+                continue
 
-                # Store distance in both directions (undirected graph)
-                key = f"{city1}-{city2}"
-                distances[key] = distance_km
-                print(
-                    f"✓ [{current}/{total_pairs}] {city1} - {city2}: {distance_km} km"
-                )
-            else:
-                print(
-                    f"✗ [{current}/{total_pairs}] No route found for {city1} - {city2}"
-                )
-                distances[f"{city1}-{city2}"] = None
+            routes = data.get("routes", [])
 
-        except Exception as e:
-            print(f"✗ [{current}/{total_pairs}] Error fetching {city1} - {city2}: {e}")
-            distances[f"{city1}-{city2}"] = None
+            if not routes:
+                print(f"✗ [{current}/{total_pairs}] No route: {city1} - {city2}")
+                continue
+
+            distance_meters = routes[0]["distance"]
+
+            distance_km = round(distance_meters / 1000, 1)
+
+            key = f"{city1}-{city2}"
+
+            distances[key] = distance_km
+
+            print(f"✓ [{current}/{total_pairs}] {city1} - {city2}: {distance_km} km")
+
+        except requests.RequestException as e:
+            print(f"✗ [{current}/{total_pairs}] Error: {city1} - {city2}: {e}")
 
     return distances
 
