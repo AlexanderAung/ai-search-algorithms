@@ -7,6 +7,36 @@ from uninformed import bfs, dfs, ids, ucs
 
 app = Flask(__name__)
 
+
+positions = {
+"Yangon": (150, 550),
+"Bago": (250, 500),
+"Naypyidaw": (400, 400),
+"Mawlamyine": (300, 600),
+"Hpa-an": (400, 600),
+"Dawei": (450, 680),
+"Myeik": (550, 680),
+
+"Pathein": (50, 500),
+"Pyay": (200, 350),
+"Magway": (350, 300),
+"Sittwe": (100, 100),
+"Hakha": (50, 50),
+
+"Mandalay": (500, 250),
+"Monywa": (400, 150),
+"Sagaing": (500, 100),
+"Pakokku": (350, 200),
+
+"Meiktila": (500, 350),
+"Taunggyi": (650, 350),
+"Loikaw": (700, 450),
+"Lashio": (700, 200),
+"Bhamo": (750, 100),
+"Myitkyina": (850, 50),
+
+}
+
 with open("map_data.json", "r") as f:
     map_graph = json.load(f)
 
