@@ -110,18 +110,31 @@ def get_city_coordinates(cities_list: list[str]) -> dict:
     for city in cities_list:
         time.sleep(1)
         params = {"q": city, "format": "json"}
+        params = {
+            "q" : f"{city}", 
+            "format": "json",
+            "countrycodes": "mm", 
+            "limit": 1
+        }
+
         try:
             print(f"Searching for {city}")
+
             r = requests.get(url, params=params, headers=headers, timeout=10)
+
             print(f"Status  : {r.status_code}")
             print(f"URL     : {r.url}")
             r.raise_for_status()
             data = r.json()
+            if not data:
+                    print(f"⚠ No result found for {city}")
+                    continue 
 
-            if data:
-                lat = data[0]["lat"]
-                lon = data[0]["lon"]
-                city_coordinates[city] = (lat, lon)
+            result = data[0]
+            lat = float(result["lat"])
+            lon = float(result["lon"])
+
+            city_coordinates[city] = (lat, lon)
 
         except requests.RequestException as e:
             print(f"Error fetching {city}: {e}")
