@@ -85,8 +85,18 @@ graph = build_graph(map_graph)
 
 @app.route("/")
 def home():
-    cities = map_graph["cities"]
-    return render_template("index.html", cities=cities)
+    return render_template(
+        "index.html",
+        cities=map_graph["cities"],
+        graph=graph,
+        positions=positions,
+        start="Yangon",
+        goal="Mandalay",
+        algorithm="bfs",
+        path=None,
+        cost=None,
+        path_edges=set()
+    )
 
 
 @app.route("/search", methods=["POST"])
