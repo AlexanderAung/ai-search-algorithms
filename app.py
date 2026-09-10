@@ -108,25 +108,38 @@ def search():
     if algo == "bfs":
         path, cost = bfs(graph, start, goal)
 
-    if algo == "dfs":
+    elif algo == "dfs":
         path, cost = dfs(graph, start, goal)
 
-    if algo == "ucs":
+    elif algo == "ucs":
         path, cost = ucs(graph, start, goal)
 
-    if algo == "ids":
+    elif algo == "ids":
         path, cost = ids(graph, start, goal)
 
-    if algo == "a_star":
+    elif algo == "a_star":
         path, cost = a_star(graph, start, goal)
 
-    if algo == "greedy":
+    elif algo == "greedy":
         path, cost = greedy(graph, start, goal)
 
-    return render_template(
-        "index.html", cities=map_graph["cities"], path=path, cost=cost
-    )
+    else:
+        return "Invalid algorithm", 400
 
+    path_edges = get_path_edges(path)
+
+    return render_template(
+        "index.html",
+        cities=map_graph["cities"],
+        graph=graph,
+        positions=positions,
+        path=path,
+        cost=cost,
+        start=start,
+        goal=goal,
+        algorithm=algo,
+        path_edges=path_edges
+    )
 
 if __name__ == "__main__":
     app.run(debug=True)
