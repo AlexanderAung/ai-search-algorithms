@@ -37,6 +37,22 @@ positions = {
 
 }
 
+def get_path_edges(path):
+    if not path:
+        return set()
+
+    edges = set()
+
+    for i in range(len(path) - 1):
+        a = path[i]
+        b = path[i + 1]
+
+        # Sort so A-B and B-A are considered the same edge
+        edges.add(tuple(sorted([a, b])))
+
+    return edges
+
+
 with open("map_data.json", "r") as f:
     map_graph = json.load(f)
 
